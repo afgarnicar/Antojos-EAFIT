@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paginita</title>
+    <style>
+        body {
+            background-size: cover; /* Ajusta la imagen para que cubra toda la pantalla */
+            background-color: #95bfbd; /* Cambia este color según tus preferencias */
+        }
+        h1 {
+            font-family: "Times New Roman", sans-serif; /* Cambia este tipo de letra según tus preferencias */
+            text-align: center;
+            font-style: italic;
+            font-size: 3em;
+            color: white;
+            background-color: #334f64;
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+        .container {
+            position: relative; /* Contenedor relativo */
+        }
+        .content img {
+            position: absolute; /* Posiciona la imagen de manera absoluta */
+            top: 80px; /* Ajusta la posición superior */
+            left: 30px; /* Ajusta la posición izquierda */
+            width: 600px; /* Ajusta el tamaño de la imagen */
+            height: 350px; /* Ajusta el tamaño de la imagen */
+            margin-left: 48%; /* Mueve la imagen hacia la derecha */
+        }
+        p {
+            font-family: "Times New Roman", sans-serif; /* Cambia este tipo de letra según tus preferencias */
+            font-size: 1.5em;
+            text-align: center;
+            color: white;
+            background-color: #334f64;
+            padding: 3em; /* Aumenta el padding para hacer espacio dentro del círculo */
+            margin: 0.2em;
+            width: 25%; /* Ajusta el ancho del párrafo */
+            margin-right: auto; /* Centra el párrafo a la derecha */
+            margin-left: 5%; /* Mueve el párrafo hacia la izquierda */
+            margin-top: 3em; /* Mueve el párrafo más abajo */
+            border-radius: 80%; /* Hace que el fondo sea circular */
+            white-space: pre-line; /* Respeta los espacios y saltos de línea */
+        }
+        p1 {
+        font-family: "Times New Roman", sans-serif; /* Cambia este tipo de letra según tus preferencias */
+        font-size: 1.5em;
+        text-align: center;
+        color: white;
+        background-color: #334f64;
+        padding: 0.5em; /* Aumenta el padding para hacer espacio dentro del círculo */
+        width: 25%; /* Ajusta el ancho del párrafo */
+        position: absolute; /* Posiciona el párrafo de manera absoluta */
+        top: 30%; /* Mueve el párrafo a la parte superior */
+        left: 60%; /* Mueve el párrafo a la parte izquierda */
+        white-space: pre-line; /* Respeta los espacios y saltos de línea */
+}
+    </style>
+</head>
+<body>
+    <h1>Categorias de producto</h1>
+    <div class="container">
+        <div class="content">
+            <img src="{% static 'images/antojitos.png' %}" alt="Descripción de la imagen">
+        </div>
+        <p>Como usuario, quiero ver los productos organizados en categorías, para encontrar más fácilmente lo que busco.
+
+        Criterios de aceptación:
+        La plataforma debe permitir filtrar productos por categorías como comida, ropa, accesorios, etc.
+        Los emprendedores deben poder asignar categorías a sus productos.</p>
+    </div>
+    <p1> Modelo </p1>
+    <p1> Realizado por Isabela Mendoza Monsalve </p1>
+</body>
+</html>
