@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia De Usuario Cesar</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #9fb6c4; /* Fondo de color */
+            color: aliceblue; /* Color de la letra */
+            position: relative; /* Necesario para posicionar el texto en la esquina */
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            color: aliceblue;
+            background-color: #425869; /* Fondo de la letra */
+            padding: 10px; /* Espacio alrededor del texto */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+        .content {
+            display: flex;
+            align-items: center; /* Centra verticalmente el contenido */
+            width: calc(100% - 40px); /* Ancho completo menos 40px para los márgenes */
+            padding: 20px;
+            margin: 0 20px; /* Márgenes de 20px a la derecha e izquierda */
+        }
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+        }
+        .image-container h2 {
+            background-color: #425869; /* Fondo del texto */
+            color: aliceblue; /* Color de la letra */
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .image-container img {
+            width: 100%; /* Ajusta el tamaño de la imagen al contenedor */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 15px; /* Redondea los bordes de la imagen */
+        }
+        .text {
+            font-family: 'Times New Roman', Times, serif;
+            color: aliceblue; /* Color de la letra */
+            background-color: #425869; /* Fondo del texto */
+            padding: 10px;
+            border-radius: 5px;
+            margin-left: 20px; /* Espacio a la izquierda del texto */
+            width: 50%;
+        }
+        .footer-text {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            color: aliceblue;
+            background-color: #425869; /* Fondo del texto */
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <h1>Agregar Filtro De Busqueda</h1>
+    <div class="content">
+        <div class="image-container">
+            <h2>Idea de visualización:</h2>
+            <img src="{% static 'imagenes/ideaFiltro.png' %}" alt="Fondito">
+        </div>
+        <div class="text">
+            <h2>Historia De Usuario</h2>
+            <p>Como propuesta para nuestro proyecto de la comercialización de emprendimientos de la universidad EAFIT, hemos recibido la siguiente historia de usuario, la cual nos da una idea a implementar en nuestra página web.</p>
+            <p>Como usuario, quiero poder filtrar los productos según mis preferencias, para encontrar más rápido lo que necesito.</p>
+            <p><strong>Criterios de aceptación:</strong></p>
+            <ul>
+                <li>La plataforma debe permitir filtrar por precio, tipo de producto y disponibilidad.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-text">
+        Trabajo Hecho por Cesar Montoya Giraldo, Proyecto 1
+    </div>
+</body>
+</html>
