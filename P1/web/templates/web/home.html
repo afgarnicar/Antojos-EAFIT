@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Negocio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'web/styles.css' %}">
+</head>
+<body>
+    <!-- Barra Superior Fija -->
+    <div class="barra-superior">
+        <img src="{% static 'web/EAFIT.jpg' %}" alt="EAFIT">
+    </div>
+
+    <!-- Historia de Usuario -->
+    <div class="historia-usuario">
+        <p><strong>Historia de usuario:</strong></p>
+        <p>Como emprendedor, quiero poder activar un botón que indique que estoy dentro de la universidad, para que los clientes sepan que pueden recoger su pedido de inmediato.</p>
+    </div>
+
+    <!-- Perfil del Negocio -->
+    <div class="business-container">
+        <div class="profile-picture">
+            <img src="{% static 'web/negocio.jpg' %}" alt="Logo del Negocio">
+        </div>
+        <div class="profile-info">
+            <div class="profile-header">
+                <h1>Manguitos</h1>
+                <button id="status-button">¿Está en la universidad?</button>
+            </div>
+            <p><strong>Manguitos | Fruta fresca 🍋🥭</strong></p>
+            <p>• Mango | Guayaba | Piña</p>
+            <p>• Universidad EAFIT 📍</p>
+            <p>• Contáctanos: <a href="tel:+573206544591">3206544591</a></p>
+            <p>• <a href="https://www.instagram.com/manguitos_med/" target="_blank">Instagram</a></p>
+        </div>
+    </div>
+
+    <!-- Catálogo de Productos -->
+    <div class="catalog">
+        <h2>Catálogo de Productos</h2>
+        <div class="catalog-products">
+            <div class="product">
+                <img src="{% static 'web/producto1.jpg' %}" alt="Producto 1">
+            </div>
+            <div class="product">
+                <img src="{% static 'web/producto2.jpg' %}" alt="Producto 2">
+            </div>
+            <div class="product">
+                <img src="{% static 'web/producto3.jpg' %}" alt="Producto 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Información del Autor -->
+    <div class="autor">
+        <p><strong>Por:</strong></p>
+        <p>Andrés Felipe Garnica Roa</p>
+    </div>
+
+    <!-- Script para el Botón de Estado -->
+    <script>
+        // Lista de estados
+        const estados = [
+            { texto: "¿Está en la universidad?", color: "#3498db" },
+            { texto: "Sí, está en la universidad", color: "green" },
+            { texto: "No, no está en la universidad", color: "red" }
+        ];
+
+        let estadoActual = 0;  // Índice del estado actual
+
+        document.getElementById("status-button").addEventListener("click", function() {
+            // Avanzar al siguiente estado en la lista
+            estadoActual = (estadoActual + 1) % estados.length;
+            
+            // Cambiar el texto y color del botón
+            this.textContent = estados[estadoActual].texto;
+            this.style.backgroundColor = estados[estadoActual].color;
+        });
+    </script>
+
+</body>
+</html>
