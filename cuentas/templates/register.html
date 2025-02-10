@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antojitos EAFIT</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cuentas/css/style.css' %}">
+</head>
+<body>
+
+ 
+    <div class="top-bar">
+        <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
+    </div>
+
+
+    <div class="content">
+        <div class="login-container">
+            <h2>Registro</h2>
+            <input type="text" placeholder="Nombre Completo" required>
+            <input type="email" placeholder="Correo Institucional" required>
+            <input type="password" placeholder="Contraseña" required>
+            <input type="number" placeholder="Numero de Celular" required>
+            <button>Registrarse</button>
+            <p>¿Ya tienes una cuenta? <a href="{% url 'inicio' %}">Inicia Sesion</a></p>
+            <p>Inicia como Invitado</p>
+        </div>
+    </div>
+
+</body>
+</html>
