@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antojos EAFIT</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cuentas/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="{% static 'js/scripts.js' %}"></script>
+</head>
+<body>
+
+ 
+    <div class="top-bar">
+        <div class="icono-menu">
+            <div class="linea"></div>
+            <div class="linea"></div>
+            <div class="linea"></div>
+        </div>
+        <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
+
+        <div class="iconos-derecha">
+            <i id="icono-usuario" class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div id="menu-usuario" class="menu-usuario">
+            Antojos EAFIT
+            {% if user.is_authenticated %}
+                <p>Bienvenido, {{ user.nombre_completo }}</p>
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+                <a href="{% url 'registro_view' %}">Registrarse</a>
+            {% endif %}
+        </div>
+        
+    </div>
+
+    <div class="back-banner">
+        
+        <img src="{% static 'cuentas/img/Banner2.png'%}" alt="Foto" class="side-banner">
+
+        <img src="{% static 'cuentas/img/Banner inicial.png'%}" alt="Foto" class="banner">
+    
+        <img src="{% static 'cuentas/img/Banner3.png'%}" alt="Foto" class="side-banner">
+          
+    </div>
+    
+    <div class="texto-recomendados">
+        RECOMENDADOS
+    </div>
+
+    <div class="contenedor-recomendados">
+        <div class="columna">
+            <div class="cuadro-recomendado-base cuadro-recomendado-gris">
+                <img src="{% static 'cuentas/img/recomendado1.png'%}" alt="Foto">
+            </div>
+            <div class="recomendado-abajo-base recomendado-abajo-azul">Nivo</div>
+            <div class="ver-ya">Ver ya!</div>
+        </div>
+        <div class="columna">
+            <div class="cuadro-recomendado-base cuadro-recomendado-azul">
+                <img src="{% static 'cuentas/img/recomendado2.png'%}" alt="Foto">
+            </div>
+            <div class="recomendado-abajo-base recomendado-abajo-gris">Taste</div>
+            <div class="ver-ya">Ver ya!</div>
+        </div>
+        <div class="columna">
+            <div class="cuadro-recomendado-base cuadro-recomendado-gris">
+                <img src="{% static 'cuentas/img/recomendado3.png'%}" alt="Foto">
+            </div>
+            <div class="recomendado-abajo-base recomendado-abajo-azul">Polle's</div>
+            <div class="ver-ya">Ver ya!</div>
+        </div>
+    </div>
+
+
+    
+    <div class="content">
+        <div id="contenedor-usuario" class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Ingresar</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="{% url 'registro_view' %}">Regístrate</a></p>
+            <p>Inicia como Invitado</p>
+        </div>
+    </div>
+    
+    
+    <div class="bottom-bar">¿Quieres que tu emprendimiento esté en Antojos Eafit? </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

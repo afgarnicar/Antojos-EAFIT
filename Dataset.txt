@@ -1,0 +1,41 @@
+DATASET TALLER 2
+
+correo_institucional": "salvarezm@eafit.edu.co",
+nombre_completo": "Simon Alvarez Mejia",
+numero_celular": "3145756221",
+password": "pbkdf2_sha256$870000$ecVX4yKO57AAd4BLxEBgQl$yRb9Qx9qh1r1SGrPJXrqFkNBzNRvQ9Gy/T8u0aGuLR8=" == "Samuel1234"
+
+correo_institucional: "vgomezu@eafit.edu.co",
+nombre_completo: "Valentina Gomez Uribe",
+numero_celular: "3153259804",
+password: "pbkdf2_sha256$870000$oQWKWiYnTtQzpmtTZeikr0$sdrbzIT0c69nqJ0WkE1NosPHfTOhlPpbZDQJmv/+5Hk=" == "Valentina1234"
+
+correo_institucional: "midiazu@eafit.edu.co",
+nombre_completo: "Maria Isabel Diaz Urrego",
+numero_celular: "3167687893",
+password: "pbkdf2_sha256$870000$Two1mKMgSCdxVSD6Q1y8UO$3WkHaDqacy1Zsq1Bg069LnWOTvjWxzgRxB6Nga6fbqE=" == "Maria1234"
+
+correo_institucional: "ilopezh@eafit.edu.co",
+nombre_completo: "Isaac Lopez Hernandez",
+numero_celular: "3196529439",
+password: "pbkdf2_sha256$870000$nVBo556Bfze8SlXUDr2UBR$OBYTfKQF+DcF1CwFsiBqO3UxXzLfD+wd5Zzr4EmshyA=" == "Isaac1234"
+
+correo_institucional: "dduquer@eafit.edu.co",
+nombre_completo: "Daniela Duque Rojas",
+numero_celular: "3187193456",
+password: "pbkdf2_sha256$870000$W9VeyWtQPcDL2Iu3BhFeJf$anBST0VARVWLxCckq9rk6up3PKm8xhLqrKf54QwNvxI=" == "Daniela1234"
+
+correo_institucional: "mfernandv@eafit.edu.co",
+nombre_completo: "Mariana Fernandez Vanoy",
+numero_celular: "3217205754",
+password: "pbkdf2_sha256$870000$fMT2c4VzmGtz1aH4n4QGtC$MwVUpnGfxj3dig89+1hwktEGKbpfecckDcz6rWBqH08=" == "Mariana1234"
+
+correo_institucional: "jcfernandv@gmail.com",
+nombre_completo: "Juan Carlos Fernandez Vanoy",
+numero_celular: "3116529439",
+password: "pbkdf2_sha256$870000$MMwDqTuRiXJ1cQEg2QjzJC$twOPusmA/vouNa6G7wMJ2QIl/YboJZpQC6nu9xxiv6Q=" == "Juan1234"
+
+Links importantes:
+Para ver la pagina = http://localhost:8000
+Para ver los datos de la DB = http://localhost:8000/api/usuarios/
+
