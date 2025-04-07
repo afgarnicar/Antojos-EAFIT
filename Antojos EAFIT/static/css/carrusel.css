@@ -1,0 +1,57 @@
+.back-banner {
+    width: 100%;
+    background-color: #292929;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 400px; /* Ajusta la altura según tus necesidades */
+  }
+  
+  .back-banner img {
+    position: absolute;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que se ajuste */
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .back-banner .left {
+    left: 0;
+    transform: translateX(-100%);
+    width: 30%; /* Ajusta el ancho de las imágenes laterales */
+  }
+  
+  .back-banner .center {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%; /* Ajusta el ancho de la imagen central */
+    z-index: 2;
+  }
+  
+  .back-banner .right {
+    right: 0;
+    transform: translateX(100%);
+    width: 30%; /* Ajusta el ancho de las imágenes laterales */
+  }
+  
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 3;
+  }
+  
+  .prev-btn {
+    left: 10px;
+  }
+  
+  .next-btn {
+    right: 10px;
+  }
+

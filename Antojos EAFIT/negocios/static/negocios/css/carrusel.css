@@ -1,0 +1,43 @@
+.back-banner {
+  width: 100%;
+  background-color: #292929;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  /* Ajusta la altura según tus necesidades */
+}
+
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+/* Estilo para limitar el tamaño del carrusel Bootstrap */
+
+.carousel-item {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  /* puedes probar también: top center o 50% 30% */
+  display: block;
+}
+
+.card-img-top {
+  height: 200px;
+  /* o el valor que mejor se vea en tu diseño */
+  object-fit: cover;
+  object-position: center;
+}
