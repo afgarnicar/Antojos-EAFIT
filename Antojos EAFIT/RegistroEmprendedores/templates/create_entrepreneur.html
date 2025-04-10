@@ -68,13 +68,42 @@
                 {{ form.location }}
             </div>
             <div class="mb-3">
-                <label class="form-label">Horario</label>
-                {{ form.schedule }}
+                <label class="form-label">Horario:</label>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lunes</label>
+                {{ form.lunes }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Martes</label>
+                {{ form.martes }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Miercoles</label>
+                {{ form.miercoles }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Jueves</label>
+                {{ form.jueves }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Viernes</label>
+                {{ form.viernes }}
             </div>
             <div class="mb-3">
                 <label class="form-label">Información de Contacto</label>
                 {{ form.contact_info }}
             </div>
+            <div class="mb-4">
+                        <label for="campaignImage" class="block text-gray-700 font-medium mb-1">Campaign Image</label>
+                        <input 
+                            type="file" 
+                            id="campaignImage" 
+                            name="campaignImage" 
+                            accept="image/*"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
