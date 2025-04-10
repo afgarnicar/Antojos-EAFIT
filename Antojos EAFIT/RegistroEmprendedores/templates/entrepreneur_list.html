@@ -30,6 +30,23 @@
         </div>
 
         <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
+
+        <div class="iconos-derecha">
+            <i id="icono-usuario" class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+
+        <div id="menu-usuario" class="menu-usuario">
+            Antojos EAFIT
+            {% if user.is_authenticated %}
+                <p>Bienvenido, {{ user.nombre_completo }}</p>
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+                <a href="{% url 'registro_view' %}">Registrarse</a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="container mt-5">
@@ -55,5 +72,8 @@
             </tbody>
         </table>
     </div>
+
+        <!-- SCRIPTS -->
+        <script src="{% static 'js/script_menu.js' %}"></script>
 </body>
 </html>

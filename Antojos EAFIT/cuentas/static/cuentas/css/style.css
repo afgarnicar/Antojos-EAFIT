@@ -1,21 +1,4 @@
-
-/* .top-bar {
-    background-color: #5b6bf5;
-    height: 2cm;
-    width: 100%;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-} */
-
-
-.bootstrap-only {
-    all: unset;
-}
-
-
+/* BARRA AZUL */
 body{
     margin: 0;
     padding: 0;
@@ -45,7 +28,7 @@ body{
     transform: translateX(-50%);
 }
 
-  /* OPCIONES BUTTON */
+  /* MENU OPCIONES */
 
 .contenedor-izquierda {
     position: relative;
@@ -100,7 +83,7 @@ body{
 
 
 
-
+/* MENU USUARIO */
 
 .iconos-derecha{
     display: flex;
@@ -139,6 +122,8 @@ body{
     background-color: #f0f0f0;
 }
 
+/* BANNER */
+
 .banner {
     width: 100%;
     max-width: 800px;
@@ -155,7 +140,7 @@ body{
    
 }
 
-
+/* TITULO RECOMENDADOS */
 .texto-recomendados{
     font-family: 'League Spartan', sans-serif;
     font-size: 65px;
@@ -169,6 +154,7 @@ body{
 }
 
 
+/* CARRUSEL DE RECOMENDADOS */
 .contenedor-recomendados{
     display: flex;
     justify-content: center;
@@ -182,12 +168,13 @@ body{
     flex-direction: column;
     align-items: center;
     position: relative;
+    width: 275px;
 }
 
 
 .cuadro-recomendado-base{
     height: 350px;
-    width: 275px;
+    width: 100%;
     position: relative;
     margin-top: 50px; 
     display: flex;
@@ -195,13 +182,22 @@ body{
     align-items: center;
     padding: 15px;
     box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .cuadro-recomendado-base img{
+    width: auto;
+    height: auto;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
 }
+
+
 
 .recomendado-abajo-base{
     height: 50px;
@@ -216,6 +212,8 @@ body{
     font-style: italic;
     padding-right: 15px;
     box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 1px;
 }
 
 
@@ -277,55 +275,11 @@ body{
 }
 
 
-
-
-.content .login-container {
-    width: 300px !important; 
-    background-color: white !important;
-    padding: 30px !important;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2)!important;
-    border-radius: 20px!important;
-    text-align: center!important;
-    margin: 50px auto!important;
-
-    position:fixed!important;
-    top: 40%!important;
-    left: 50%!important;
-    transform: translate(-50%, -50%)!important;
-
-}
-
-
-.content .login-container h2 {
-    margin-bottom: 15px!important;
-}
-
-.content .login-container label {
-    display: block!important;
-    font-weight: bold!important;
-    margin-top: 10px!important;
-}
-
-.content .login-container input {
-    width: 100%!important;
-    padding: 8px!important;
-    margin-top: 5px!important;
-    border: 1px solid #ccc!important;
-    border-radius: 5px!important;
-}
-
-.content .login-container button {
-    width: 100%!important;
-    padding: 10px!important;
-    margin-top: 15px!important;
-    background-color: #5b6bf5!important;
-    color: white!important;
-    border: none!important;
-    border-radius: 5px!important;
-    cursor: pointer!important;
-}
-
-.content .login-container button:hover {
-    background-color: #4755d4;
-}
-
+/* .titulo-guia {
+    font-family: 'League Spartan', sans-serif;
+    color: #5b6bf5;
+    text-align: center;
+    font-weight: 700;
+    margin: 20px 0;
+    font-size: 2.5rem;
+} */
