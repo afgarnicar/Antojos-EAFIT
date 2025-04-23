@@ -62,6 +62,9 @@
             <div class="mb-3">
                 <label class="form-label">Nombre del Negocio</label>
                 {{ form.business_name }}
+                {% if form.business_name.errors %}
+                    <div class="text-danger">{{ form.business_name.errors.0 }}</div>
+                {% endif %}
             </div>
             <div class="mb-3">
                 <label class="form-label">Ubicación</label>
@@ -91,11 +94,14 @@
                 {{ form.viernes }}
             </div>
             <div class="mb-3">
-                <label class="form-label">Información de Contacto</label>
+                <label class="form-label">Contacto del emprendedor</label>
                 {{ form.contact_info }}
+                {% if form.business_name.errors %}
+                    <div class="text-danger">{{ form.business_name.errors.0 }}</div>
+                {% endif %}
             </div>
             <div class="mb-4">
-                        <label for="campaignImage" class="block text-gray-700 font-medium mb-1">Campaign Image</label>
+                        <label for="campaignImage" class="block text-gray-700 font-medium mb-1">Logo del empredimiento</label>
                         <input 
                             type="file" 
                             id="campaignImage" 

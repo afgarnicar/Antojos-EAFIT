@@ -56,7 +56,11 @@
                 <tr>
                     <th>Nombre del Negocio</th>
                     <th>Ubicación</th>
-                    <th>Horario</th>
+                    <th>Horario Lunes</th>
+                    <th>Horario Martes</th>
+                    <th>Horario Miercoles</th>
+                    <th>Horario Jueves</th>
+                    <th>Horario Viernes</th>
                     <th>Contacto</th>
                 </tr>
             </thead>
@@ -65,8 +69,17 @@
                     <tr>
                         <td>{{ e.business_name }}</td>
                         <td>{{ e.location }}</td>
-                        <td>{{ e.schedule }}</td>
+                        <td>{{ e.lunes }}</td>
+                        <td>{{ e.martes }}</td>
+                        <td>{{ e.miercoles }}</td>
+                        <td>{{ e.jueves }}</td>
+                        <td>{{ e.viernes }}</td>
                         <td>{{ e.contact_info }}</td>
+                        <td>
+                            <a href="{% url 'delete_entrepreneur' e.pk %}" class="btn btn-sm btn-danger">
+                Eliminar
+            </a>
+        </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -12,7 +12,7 @@ class Entrepreneur(models.Model):
     miercoles = models.CharField(max_length=255, blank=True, null=True)
     jueves = models.CharField(max_length=255, blank=True, null=True)
     viernes = models.CharField(max_length=255, blank=True, null=True)
-    contact_info = models.CharField(max_length=255, blank=True, null=True)
+    contact_info = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='logos/', blank=True, null=True)
 
 def __str__(self):

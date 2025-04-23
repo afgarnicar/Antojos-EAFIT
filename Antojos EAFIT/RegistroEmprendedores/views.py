@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EntrepreneurForm
 from .models import Entrepreneur
 
@@ -12,6 +12,13 @@ def create_entrepreneur(request):
     else:
         form = EntrepreneurForm()
     return render(request, 'create_entrepreneur.html', {'form': form})
+
+def delete_entrepreneur(request, pk):
+    entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
+    if request.method == 'POST':
+        entrepreneur.delete()
+        return redirect('entrepreneur_list')
+    return render(request, 'confirm_delete.html', {'entrepreneur': entrepreneur})
 
 def success(request):
     return render(request, 'success.html')
