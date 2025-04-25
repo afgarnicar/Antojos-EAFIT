@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-7u@cf92-s5)if73u=a21(=#qty^nrk4_kd%%bu7q@ke88$&w_%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['antojos-eafit.onrender.com']
+
 
 
 # Application definition
