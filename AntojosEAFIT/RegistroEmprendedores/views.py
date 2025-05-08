@@ -34,37 +34,41 @@ def add_product(request, pk):
     entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
 
     if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        image = request.FILES.get('image')
+        category_id = request.POST.get('category')
+
+        # Mapeo de categorías
+        category_mapping = {
+            "1": "Dulcesito",
+            "2": "Saladito",
+            "3": "Accesorios",
+            "4": "Bebidas",
+            "5": "Servicios",
+            "6": "Candies",
+        }
+        category_name = category_mapping.get(category_id)
+
+        # Validaciones
+        if not all([name, description, price, image, category_name]):
+            return HttpResponse("Error: Todos los campos son obligatorios.")
+
         try:
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            price = request.POST.get('price')
-            image = request.FILES.get('image')
-            category_id = request.POST.get('category')
-
-            category_mapping = {
-                "1": "Dulcesito",
-                "2": "Saladito",
-                "3": "Accesorios",
-                "4": "Bebidas",
-                "5": "Servicios",
-                "6": "Candies",
-            }
-            category_name = category_mapping.get(category_id, "")
-
-            if not name or not description or not price or not image or not category_name:
-                return HttpResponse("Error: All fields are required.")
-
+            # Crear el producto
             Product.objects.create(
                 name=name,
                 description=description,
                 price=price,
-                image=image,
+                image=image,  # Cloudinary manejará el almacenamiento si está configurado
                 category=category_name,
                 entrepreneur=entrepreneur
             )
-            return redirect('product_success', pk=entrepreneur.pk)  # Redirección con pk
+            return redirect('product_success', pk=entrepreneur.pk)
         except Exception as e:
-            return HttpResponse(f"Error: {e}")
+            return HttpResponse(f"Error al crear el producto: {e}")
+
     return render(request, 'add_product.html', {'entrepreneur': entrepreneur})
 
 

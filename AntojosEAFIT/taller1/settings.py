@@ -50,7 +50,11 @@ INSTALLED_APPS = [
     'negocios',
     'RegistroEmprendedores',
     'guia',
+    'cloudinary',
+    'cloudinary_storage',
 ]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,6 +67,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'taller1.urls'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'ddva3sskw',
+    'API_KEY': '381472896223772',
+    'API_SECRET': 'duI4eXeLm6xb2U84ZvMFoce2Sis',
+}
 
 TEMPLATES = [
     {
