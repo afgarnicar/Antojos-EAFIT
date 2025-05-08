@@ -15,7 +15,18 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 load_dotenv()
+
+
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_URL').split('@')[-1],
+    api_key=os.getenv('CLOUDINARY_URL').split('//')[1].split(':')[0],
+    api_secret=os.getenv('CLOUDINARY_URL').split(':')[1].split('@')[0]
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,13 +56,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     'rest_framework',
     'cuentas',
     'negocios',
     'RegistroEmprendedores',
     'guia',
-    'cloudinary',
-    'cloudinary_storage',
+
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -68,11 +80,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'taller1.urls'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'ddva3sskw',
-    'API_KEY': '381472896223772',
-    'API_SECRET': 'duI4eXeLm6xb2U84ZvMFoce2Sis',
-}
 
 TEMPLATES = [
     {
