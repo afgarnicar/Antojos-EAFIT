@@ -28,7 +28,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='products/')
+    image_url = models.URLField(blank=True, null=True) # Nuevo campo para URL de Cloudinary
 
     def __str__(self):
         return self.name

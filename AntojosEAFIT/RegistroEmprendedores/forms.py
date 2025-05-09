@@ -1,5 +1,5 @@
 from django import forms
-from .models import Entrepreneur
+from .models import Entrepreneur, Product
 
 class EntrepreneurForm(forms.ModelForm):
     class Meta:
@@ -28,10 +28,16 @@ class EntrepreneurForm(forms.ModelForm):
             'logo': forms.ClearableFileInput(attrs={'class': 'form-control form-control-sm'}),
         }
 
-from django import forms
-from .models import Product
-
 class ProductForm(forms.ModelForm):
+    # Field to handle the file upload in the form
+    image_file = forms.FileField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'description', 'image']
+        fields = ['name', 'price', 'category', 'description', 'image_file']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'category': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }

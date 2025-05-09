@@ -15,14 +15,16 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
+load_dotenv()
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-load_dotenv()
 
 
-cloudinary.config(secure=True)
+
+
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
@@ -30,7 +32,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config(secure=True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,3 +150,5 @@ AUTH_USER_MODEL = 'cuentas.Usuario'
 
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
 
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

@@ -37,12 +37,12 @@
         <div id="menu-usuario" class="menu-usuario">
             Antojos EAFIT
             {% if user.is_authenticated %}
-            {% else %}
-            {% endif %}
-                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro_view' %}">Registrarse</a>
                 <p>Bienvenido, {{ user.nombre_completo }}</p>
                 <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+                <a href="{% url 'registro_view' %}">Registrarse</a>
+            {% endif %}
         </div>
     </div>
 
@@ -50,22 +50,33 @@
         <h2>Agregar Producto</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.non_field_errors }}
+
             <div class="mb-3">
-                <label for="name" class="form-label">Nombre del Producto</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.name.errors }}
             </div>
+
             <div class="mb-3">
-                <label for="description" class="form-label">Descripción</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.description.errors }}
             </div>
+
             <div class="mb-3">
-                <label for="price" class="form-label">Precio</label>
-                <input type="number" class="form-control" id="price" name="price" required>
+                {{ form.price.label_tag }}
+                {{ form.price }}
+                {{ form.price.errors }}
             </div>
+
             <div class="mb-3">
-                <label for="image" class="form-label">Imagen</label>
-                <input type="file" class="form-control" id="image" name="image" required>
+                {{ form.image_file.label_tag }}
+                {{ form.image_file }}
+                {{ form.image_file.errors }}
             </div>
+
+            <!-- Mantenemos el select manual de categorías -->
             <div class="mb-3">
                 <label for="category" class="form-label">Categoría</label>
                 <select class="form-select" id="category" name="category" required>
@@ -77,7 +88,11 @@
                     <option value="5">Servicios</option>
                     <option value="6">Candies</option>
                 </select>
+                {% if form.errors.category %}
+                    <div class="text-danger small">{{ form.errors.category }}</div>
+                {% endif %}
             </div>
+
             <button type="submit" class="btn btn-primary">Agregar Producto</button>
             <a href="{% url 'entrepreneur_list' %}" class="btn btn-secondary">Cancelar</a>
         </form>

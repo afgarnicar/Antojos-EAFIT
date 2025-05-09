@@ -65,13 +65,11 @@
                 <img src="{% static 'cuentas/img/recomendado3.png' %}" class="d-block w-100" alt="Emprendimiento 3">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmprendimientos"
-            data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmprendimientos"
-            data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
@@ -83,21 +81,17 @@
         <p class="text-muted">Descubre lo mejor de los negocios en EAFIT</p>
     </div>
 
-    <!-- <p>DEBUG: hay {{ products.count }} productos en la variable <code>products</code>.</p>-->
-
     <!-- Catálogo -->
-        <div class="container mt-4 mb-5">
+    <div class="container mt-4 mb-5">
       <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
         {% for product in products %}
           <div class="col">
             <a href="{% url 'product_detail' product.id %}" class="text-decoration-none">
               <div class="card h-100 shadow-sm">
-                {% if product.image %}
-                  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% if product.image_url %}
+                  <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
                 {% else %}
-                  <img src="{% static 'media/products/images/default-product.png' %}"
-                       class="card-img-top"
-                       alt="Imagen no disponible">
+                  <img src="{% static 'media/products/images/default-product.png' %}" class="card-img-top" alt="Imagen no disponible">
                 {% endif %}
                 <div class="card-body p-2 text-center">
                   <h6 class="card-title mb-1">{{ product.name }}</h6>
@@ -114,7 +108,6 @@
         {% endfor %}
       </div>
     </div>
-
 
     <!-- Bottom bar -->
     <a class="bottom-bar" href="{% url 'guia_emprendedor' %}">¿Quieres que tu emprendimiento esté en Antojos Eafit?</a>

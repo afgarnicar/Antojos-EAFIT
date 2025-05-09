@@ -3,6 +3,7 @@ from .forms import EntrepreneurForm, ProductForm
 from .models import Entrepreneur, Product
 from django.http import HttpResponse
 from django.core.files.storage import default_storage
+from cloudinary.uploader import upload as cloudinary_upload
 
 # Create your views here.
 def create_entrepreneur(request):
@@ -35,18 +36,11 @@ def add_product(request, pk):
     entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
 
     if request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
-        price = request.POST.get('price')
-        image = request.FILES.get('image')
-        category_id = request.POST.get('category')
+        form = ProductForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return HttpResponse("Formulario inválido", status=400)
 
-        # Depuración: verificar recepción y storage
-        print("--> request.FILES:", request.FILES)
-        print("--> image object:", image)
-        print("--> storage backend:", default_storage.__class__.__module__, default_storage.__class__.__name__)
-
-        # Mapeo de categorías
+        # ---- Mapeo y validación de categoría ----
         category_mapping = {
             "1": "Dulcesito",
             "2": "Saladito",
@@ -55,30 +49,38 @@ def add_product(request, pk):
             "5": "Servicios",
             "6": "Candies",
         }
+        category_id = request.POST.get('category')
         category_name = category_mapping.get(category_id)
-
-        # Validaciones
-        if not all([name, description, price, image, category_name]):
-            return HttpResponse("Error: Todos los campos son obligatorios.")
+        if not category_name:
+            return HttpResponse("Categoría inválida.", status=400)
 
         try:
-            # Crear el producto
-            product = Product.objects.create(
-                name=name,
-                description=description,
-                price=price,
-                image=image,  # Cloudinary manejará el almacenamiento si está configurado
+            # 1) Subir la imagen a Cloudinary
+            image_file = form.cleaned_data['image_file']
+            result = cloudinary_upload(image_file, folder="products/")
+            secure_url = result.get('secure_url')
+
+            # 2) Crear el producto con la categoría **nombre**
+            Product.objects.create(
+                name=form.cleaned_data['name'],
+                description=form.cleaned_data['description'],
+                price=form.cleaned_data['price'],
                 category=category_name,
-                entrepreneur=entrepreneur
+                entrepreneur=entrepreneur,
+                image_url=secure_url
             )
-            # Depuración: URL resultante
-            print("--> product.image.url:", product.image.url)
-
             return redirect('product_success', pk=entrepreneur.pk)
-        except Exception as e:
-            return HttpResponse(f"Error al crear el producto: {e}")
 
-    return render(request, 'add_product.html', {'entrepreneur': entrepreneur})
+        except Exception as e:
+            return HttpResponse(f"Error al subir a Cloudinary: {e}", status=500)
+
+    else:
+        form = ProductForm()
+
+    return render(request, 'add_product.html', {
+        'entrepreneur': entrepreneur,
+        'form': form
+    })
 
 
 def view_products(request, pk):
