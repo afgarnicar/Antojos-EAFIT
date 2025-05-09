@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EntrepreneurForm, ProductForm
 from .models import Entrepreneur, Product
 from django.http import HttpResponse
+from django.core.files.storage import default_storage
 
 # Create your views here.
 def create_entrepreneur(request):
@@ -40,6 +41,11 @@ def add_product(request, pk):
         image = request.FILES.get('image')
         category_id = request.POST.get('category')
 
+        # Depuración: verificar recepción y storage
+        print("--> request.FILES:", request.FILES)
+        print("--> image object:", image)
+        print("--> storage backend:", default_storage.__class__.__module__, default_storage.__class__.__name__)
+
         # Mapeo de categorías
         category_mapping = {
             "1": "Dulcesito",
@@ -57,7 +63,7 @@ def add_product(request, pk):
 
         try:
             # Crear el producto
-            Product.objects.create(
+            product = Product.objects.create(
                 name=name,
                 description=description,
                 price=price,
@@ -65,6 +71,9 @@ def add_product(request, pk):
                 category=category_name,
                 entrepreneur=entrepreneur
             )
+            # Depuración: URL resultante
+            print("--> product.image.url:", product.image.url)
+
             return redirect('product_success', pk=entrepreneur.pk)
         except Exception as e:
             return HttpResponse(f"Error al crear el producto: {e}")

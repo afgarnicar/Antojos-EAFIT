@@ -22,11 +22,15 @@ import cloudinary.api
 load_dotenv()
 
 
-cloudinary.config(
-    cloud_name=os.getenv('CLOUDINARY_URL').split('@')[-1],
-    api_key=os.getenv('CLOUDINARY_URL').split('//')[1].split(':')[0],
-    api_secret=os.getenv('CLOUDINARY_URL').split(':')[1].split('@')[0]
-)
+cloudinary.config(secure=True)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY':    os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,8 +42,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-7u@cf92-s5)if73u=a21(=#qty^nrk4_kd%%bu7q@ke88$&w_%'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
@@ -66,7 +70,7 @@ INSTALLED_APPS = [
 
 ]
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
