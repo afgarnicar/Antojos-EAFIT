@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EntrepreneurForm, ProductForm
 from .models import Entrepreneur, Product
 from django.http import HttpResponse
-from django.core.files.storage import default_storage
 from cloudinary.uploader import upload as cloudinary_upload
 
 # Create your views here.
@@ -88,47 +87,69 @@ def view_products(request, pk):
     products = Product.objects.filter(entrepreneur=entrepreneur)
     return render(request, 'view_products.html', {'entrepreneur': entrepreneur, 'products': products})
 
+
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    entrepreneur = product.entrepreneur  # Get the associated entrepreneur
+    entrepreneur = product.entrepreneur
 
     if request.method == 'POST':
+        # Recoge datos del formulario
+        name        = request.POST.get('name')
+        description = request.POST.get('description')
+        price       = request.POST.get('price')
+        image_file  = request.FILES.get('image_file')  # input name in template
+        category_id = request.POST.get('category')
+
+        # Mapeo de categorías
+        category_mapping = {
+            "1": "Dulcesito",
+            "2": "Saladito",
+            "3": "Accesorios",
+            "4": "Bebidas",
+            "5": "Servicios",
+            "6": "Candies",
+        }
+        category_name = category_mapping.get(category_id)
+
+        # Validación
+        if not all([name, description, price, category_name]):
+            return HttpResponse("Error: Todos los campos excepto imagen son obligatorios.", status=400)
+
         try:
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            price = request.POST.get('price')
-            image = request.FILES.get('image')
-            category_id = request.POST.get('category')
-
-            category_mapping = {
-                "1": "Dulcesito",
-                "2": "Saladito",
-                "3": "Accesorios",
-                "4": "Bebidas",
-                "5": "Servicios",
-                "6": "Candies",
-            }
-            category_name = category_mapping.get(category_id, "")
-
-            if not name or not description or not price or not category_name:
-                return HttpResponse("Error: All fields except image are required.")
-
-            # Update the product fields
-            product.name = name
+            # Actualiza campos básicos
+            product.name        = name
             product.description = description
-            product.price = price
-            product.category = category_name
+            product.price       = price
+            product.category    = category_name
 
-            if image:  # Update the image only if a new one is provided
-                product.image = image
+            # Si hay nueva imagen, súbela a Cloudinary y actualiza URL
+            if image_file:
+                result = cloudinary_upload(image_file, folder="products/")
+                product.image_url = result.get('secure_url')
 
             product.save()
-            return redirect('view_products', pk=entrepreneur.pk)  # Redirect to the product list
+            return redirect('view_products', pk=entrepreneur.pk)
+
         except Exception as e:
-            return HttpResponse(f"Error: {e}")
+            return HttpResponse(f"Error al actualizar el producto: {e}", status=500)
 
-    return render(request, 'edit_product.html', {'product': product, 'entrepreneur': entrepreneur})
+    # GET: muestra el formulario con valores actuales
+    # Prepara un diccionario para inyectar las categorías actuales
+    reverse_mapping = {v: k for k, v in {
+        "1": "Dulcesito",
+        "2": "Saladito",
+        "3": "Accesorios",
+        "4": "Bebidas",
+        "5": "Servicios",
+        "6": "Candies",
+    }.items()}
+    current_cat_value = reverse_mapping.get(product.category, "")
 
+    return render(request, 'edit_product.html', {
+        'product': product,
+        'entrepreneur': entrepreneur,
+        'current_category': current_cat_value,
+    })
 
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
