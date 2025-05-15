@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'cuentas/css/login_style.css' %}">
     <link rel="stylesheet" href="{% static 'negocios/css/carrusel.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/carrusel_recomendados.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_banner.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
     
 </head>
@@ -92,26 +93,26 @@
                 <div class="d-flex justify-content-between">
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
-                            <img src="{% static 'cuentas/img/recomendado1.png' %}" class="img-recommended" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado1.png' %}" class="img-recommended" alt="Nivo">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Nivo</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=1 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-azul">
-                            <img src="{% static 'cuentas/img/recomendado3.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado3.png'%}" alt="Polle's">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-gris">Polle's</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=2 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
-                            <img src="{% static 'cuentas/img/recomendado2.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado2.png'%}" alt="Taste">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Taste</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=3 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                 </div>
@@ -123,26 +124,26 @@
                 <div class="d-flex justify-content-between">
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-azul">
-                            <img src="{% static 'cuentas/img/recomendado5.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado5.png'%}" alt="Gomas y Mas">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-gris">Gomas y Mas</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=4 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
-                            <img src="{% static 'cuentas/img/recomendado4.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado4.png'%}" alt="Buñuelitos">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Buñuelitos</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=5 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-azul">
-                            <img src="{% static 'cuentas/img/recomendado6.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado6.png'%}" alt="Surtidito">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-gris">Surtidito</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=6 %}" class="ver-ya">Ver ya!</a>
                     </div>
                 </div>
             </div>
@@ -153,27 +154,27 @@
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
                             <div class="img-wrapper">
-                                <img src="{% static 'cuentas/img/recomendado7.png'%}" alt="Foto">
+                                <img src="{% static 'cuentas/img/recomendado7.png'%}" alt="Bowlings">
                             </div>
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Bowlings</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=7 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-azul">
-                            <img src="{% static 'cuentas/img/recomendado8.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado8.png'%}" alt="Barquilloz">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-gris">Barquilloz</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=8 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
-                            <img src="{% static 'cuentas/img/recomendado9.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado9.png'%}" alt="Joy">
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Joy</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=9 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                 </div>
@@ -186,27 +187,27 @@
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
                             <div class="img-wrapper">
-                                <img src="{% static 'cuentas/img/recomendado10.png'%}" alt="Foto">
+                                <img src="{% static 'cuentas/img/recomendado10.png'%}" alt="Las Cremosas">
                             </div>
                         </div>
-                        <div class="recomendado-abajo-base recomendado-abajo-azul">Bowlings</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <div class="recomendado-abajo-base recomendado-abajo-azul">Las Cremosas</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=10 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-azul">
-                            <img src="{% static 'cuentas/img/recomendado11.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado11.png'%}" alt="Galletas Maria">
                         </div>
-                        <div class="recomendado-abajo-base recomendado-abajo-gris">Barquilloz</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <div class="recomendado-abajo-base recomendado-abajo-gris">Galletas Maria</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=11 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
-                            <img src="{% static 'cuentas/img/recomendado12.png'%}" alt="Foto">
+                            <img src="{% static 'cuentas/img/recomendado12.png'%}" alt="Chepe Patatas">
                         </div>
-                        <div class="recomendado-abajo-base recomendado-abajo-azul">Joy</div>
-                        <div class="ver-ya">Ver ya!</div>
+                        <div class="recomendado-abajo-base recomendado-abajo-azul">Chepe Patatas</div>
+                        <a href="{% url 'entrepreneur_detail_carousel' entrepreneur_id=12 %}" class="ver-ya">Ver ya!</a>
                     </div>
 
                 </div>

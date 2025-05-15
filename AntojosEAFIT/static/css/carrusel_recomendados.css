@@ -1,51 +1,203 @@
-/* Contenedor principal con espacio preciso */
-#carouselRecomendados {
+/* Estilos para la sección de recomendados */
+.recommended-section {
+    background-color: #f8f9fa;
     position: relative;
-    padding: 0 200px; /* Espacio para flechas */
-  }
-  
-  /* Reset de estilos Bootstrap */
-  .exact-arrow {
-    width: auto !important;
-    height: auto !important;
-    background: none !important;
-    opacity: 1 !important;
-    border: none !important;
-    padding: 0 !important;
-    z-index: 10;
-  }
-  
-  /* Posicionamiento preciso */
-  .carousel-control-prev.exact-arrow {
-    left: 50px;
-  }
-  
-  .carousel-control-next.exact-arrow {
-    right: 50px;
-  }
-  
-  /* Contenedor del ícono */
-  .arrow-icon-wrapper {
-    display: block;
-    width: 24px;
-    height: 24px;
-    pointer-events: none; /* El click solo en el botón */
-  }
-  
-  /* Ícono SVG */
-  .arrow-icon {
-    display: block;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+/* Estilo para el título de la sección */
+.section-title {
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    color: #333;
+    font-size: 2.5rem;
+    padding-bottom: 15px;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: #4e73df;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Estilos para el contenedor del carrusel */
+.owl-carousel {
+    position: relative;
+    padding: 0 40px;
+}
+
+/* Estilos para las tarjetas de productos */
+.product-card {
+    padding: 15px;
+}
+
+.card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border-radius: 10px;
+    background: white;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.card-img-top {
     width: 100%;
     height: 100%;
-    transition: transform 0.2s ease;
-  }
-  
-  /* Efectos interactivos */
-  .exact-arrow:hover .arrow-icon {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
-  }
-  
-  .exact-arrow:active .arrow-icon {
-    transform: scale(1);
-  }
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para los botones */
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    padding: 0.5rem 1rem;
+}
+
+.btn-outline-primary {
+    color: #4e73df;
+    border-color: #4e73df;
+    padding: 0.5rem 1rem;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4e73df;
+    color: white;
+}
+
+/* Estilos para la navegación del carrusel */
+.owl-nav {
+    margin: 0;
+}
+
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white !important;
+    color: #4e73df !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 20px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.owl-carousel .owl-nav button.owl-prev {
+    left: 0;
+}
+
+.owl-carousel .owl-nav button.owl-next {
+    right: 0;
+}
+
+.owl-carousel .owl-nav button.owl-prev:hover,
+.owl-carousel .owl-nav button.owl-next:hover {
+    background-color: #4e73df !important;
+    color: white !important;
+}
+
+.owl-carousel .owl-dots {
+    margin-top: 20px;
+}
+
+.owl-carousel .owl-dot span {
+    background-color: #d1d3e2 !important;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+}
+
+.owl-carousel .owl-dot.active span {
+    background-color: #4e73df !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .recommended-section {
+        padding: 40px 0;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .owl-carousel {
+        padding: 0 30px;
+    }
+
+    .card-img-container {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title h2 {
+        font-size: 1.75rem;
+    }
+
+    .owl-carousel {
+        padding: 0 20px;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,147 @@
+/* Estilos para los botones Ver detalles */
+.ver-ya,
+.card .ver-ya,
+.columna .ver-ya,
+a.ver-ya {
+    background-color: white !important;
+    color: #5B6BF5 !important;
+    font-family: 'Arimo', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 20px;
+    width: auto;
+    min-width: 150px;
+    border: 2px solid #5B6BF5;
+    margin-top: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ver-ya:hover,
+.card .ver-ya:hover,
+.columna .ver-ya:hover,
+a.ver-ya:hover {
+    background-color: #5B6BF5 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(91, 107, 245, 0.3);
+    text-decoration: none;
+}
+
+/* Estilos para los títulos de productos */
+.recomendado-abajo-base {
+    height: auto;
+    min-height: 40px;
+    width: 275px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arimo', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 1px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* Estilos para los contenedores de productos */
+.cuadro-recomendado-base {
+    height: 350px;
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.cuadro-recomendado-base img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+/* Colores de fondo */
+.cuadro-recomendado-azul {
+    background-color: #5B6BF5;
+}
+
+.cuadro-recomendado-gris {
+    background-color: #dfdfdf;
+}
+
+.recomendado-abajo-gris {
+    background-color: #ced6ff;
+}
+
+.recomendado-abajo-azul {
+    background-color: #5B6BF5;
+    color: white;
+}
+
+/* Barra superior */
+.top-bar {
+    width: 100%;
+    height: 2cm;
+    background-color: #5B6BF5;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+/* Barra inferior */
+.bottom-bar {
+    width: 100%;
+    height: 1.5cm;
+    background-color: #5B6BF5;
+    position: flex;
+    bottom: 0;
+    left: 0;
+    font-family: 'Arimo', sans-serif;
+    font-size: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    text-decoration: none;
+}
+
+.bottom-bar:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #4957d9;
+}
+
+/* Título de recomendados */
+.texto-recomendados {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+} 

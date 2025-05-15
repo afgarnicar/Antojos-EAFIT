@@ -40,4 +40,23 @@ def category_products(request, category_name):
 
     return render(request, 'category_products.html', {'products': products, 'category_name': category_name})
 
+def entrepreneur_detail_carousel(request, entrepreneur_id):
+    entrepreneur = get_object_or_404(Entrepreneur, pk=entrepreneur_id)
+    products = Product.objects.filter(entrepreneur=entrepreneur)
+    return render(request, 'entrepreneur_detail_carousel.html', {
+        'entrepreneur': entrepreneur,
+        'products': products
+    })
+
+def get_recommended_products():
+    # For now, we'll just get the latest 12 products
+    # You can modify this logic later to use different criteria for recommendations
+    return Product.objects.select_related('entrepreneur').order_by('-id')[:12]
+
+def inicio(request):
+    recommended_products = get_recommended_products()
+    return render(request, 'inicio.html', {
+        'recommended_products': recommended_products
+    })
+
 

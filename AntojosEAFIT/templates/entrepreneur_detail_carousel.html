@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Información del emprendimiento -->
+        <div class="col-md-4">
+            <div class="card">
+                {% if entrepreneur.logo %}
+                <img src="{{ entrepreneur.logo.url }}" class="card-img-top" alt="{{ entrepreneur.business_name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h1 class="card-title">{{ entrepreneur.business_name }}</h1>
+                    <p class="card-text">{{ entrepreneur.description }}</p>
+                    <div class="entrepreneur-info">
+                        <p><strong>Ubicación:</strong> {{ entrepreneur.location }}</p>
+                        <p><strong>Información de contacto:</strong> {{ entrepreneur.contact_info }}</p>
+                        
+                        <div class="horarios">
+                            <h4>Horarios:</h4>
+                            <p><strong>Lunes:</strong> 
+                                {% if entrepreneur.lunes_inicio and entrepreneur.lunes_fin %}
+                                    {{ entrepreneur.lunes_inicio|time:"H:i" }} - {{ entrepreneur.lunes_fin|time:"H:i" }}
+                                {% else %}
+                                    No disponible
+                                {% endif %}
+                            </p>
+                            <p><strong>Martes:</strong> 
+                                {% if entrepreneur.martes_inicio and entrepreneur.martes_fin %}
+                                    {{ entrepreneur.martes_inicio|time:"H:i" }} - {{ entrepreneur.martes_fin|time:"H:i" }}
+                                {% else %}
+                                    No disponible
+                                {% endif %}
+                            </p>
+                            <p><strong>Miércoles:</strong> 
+                                {% if entrepreneur.miercoles_inicio and entrepreneur.miercoles_fin %}
+                                    {{ entrepreneur.miercoles_inicio|time:"H:i" }} - {{ entrepreneur.miercoles_fin|time:"H:i" }}
+                                {% else %}
+                                    No disponible
+                                {% endif %}
+                            </p>
+                            <p><strong>Jueves:</strong> 
+                                {% if entrepreneur.jueves_inicio and entrepreneur.jueves_fin %}
+                                    {{ entrepreneur.jueves_inicio|time:"H:i" }} - {{ entrepreneur.jueves_fin|time:"H:i" }}
+                                {% else %}
+                                    No disponible
+                                {% endif %}
+                            </p>
+                            <p><strong>Viernes:</strong> 
+                                {% if entrepreneur.viernes_inicio and entrepreneur.viernes_fin %}
+                                    {{ entrepreneur.viernes_inicio|time:"H:i" }} - {{ entrepreneur.viernes_fin|time:"H:i" }}
+                                {% else %}
+                                    No disponible
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos del emprendimiento -->
+        <div class="col-md-8">
+            <h2 class="mb-4">Productos</h2>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if product.image_url %}
+                        <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
+                            <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
+                            <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p>Este emprendimiento aún no tiene productos registrados.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #5B6BF5;
+    font-family: 'Poppins', sans-serif;
+}
+
+.entrepreneur-info p {
+    margin-bottom: 0.5rem;
+}
+
+.horarios {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.horarios h4 {
+    color: #5B6BF5;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background-color: #5B6BF5;
+    border-color: #5B6BF5;
+}
+
+.btn-primary:hover {
+    background-color: #4957d9;
+    border-color: #4957d9;
+}
+</style>
+{% endblock %} 
