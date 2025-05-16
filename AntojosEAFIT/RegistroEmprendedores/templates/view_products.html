@@ -33,16 +33,18 @@
     <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
     <div class="iconos-derecha">
       <i id="icono-usuario" class="fa-solid fa-user"></i>
-      <i class="fa-solid fa-magnifying-glass"></i>
+      <a href="{% url 'busqueda_view' %}">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </a>
     </div>
     <div id="menu-usuario" class="menu-usuario">
       Antojos EAFIT
       {% if user.is_authenticated %}
-        <p>Bienvenido, {{ user.nombre_completo }}</p>
-        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+      <p>Bienvenido, {{ user.nombre_completo }}</p>
+      <a href="{% url 'logout' %}">Cerrar Sesión</a>
       {% else %}
-        <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-        <a href="{% url 'registro_view' %}">Registrarse</a>
+      <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+      <a href="{% url 'registro_view' %}">Registrarse</a>
       {% endif %}
     </div>
   </div>
@@ -61,26 +63,27 @@
       </thead>
       <tbody>
         {% for product in products %}
-          <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>$ {{ product.price }}</td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ product.pk }}" data-bs-toggle="dropdown" aria-expanded="false">
-                  Acciones
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ product.pk }}">
-                  <li>
-                    <a class="dropdown-item" href="{% url 'edit_product' product.pk %}">Editar</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item text-danger" href="{% url 'delete_product' product.pk %}">Eliminar</a>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>$ {{ product.price }}</td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                id="dropdownMenuButton{{ product.pk }}" data-bs-toggle="dropdown" aria-expanded="false">
+                Acciones
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ product.pk }}">
+                <li>
+                  <a class="dropdown-item" href="{% url 'edit_product' product.pk %}">Editar</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" href="{% url 'delete_product' product.pk %}">Eliminar</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>

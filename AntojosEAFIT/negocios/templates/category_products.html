@@ -28,8 +28,15 @@
                 <a href="{% url 'inicio' %}">Inicio</a>
                 <a href="{% url 'categorias' %}">Categorias</a>
                 <a href="{% url 'catalogo' %}">Productos</a>
+
+                {% if user.is_authenticated %}
+                <!-- Solo muestro estos enlaces si el usuario está logueado -->
                 <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
-                <a href="{% url 'entrepreneur_list' %}">Lista emprendimientos</a>
+                <a href="{% url 'entrepreneur_list' %}">Mis emprendimientos</a> <!-- Cambié el texto para claridad -->
+                {% else %}
+                <!-- Opcional: Enlaces para usuarios no logueados -->
+                <a href="{% url 'login_view' %}">Iniciar sesión para crear</a>
+                {% endif %}
             </div>
         </div>
 
@@ -37,17 +44,19 @@
 
         <div class="iconos-derecha">
             <i id="icono-usuario" class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="{% url 'busqueda_view' %}">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
 
         <div id="menu-usuario" class="menu-usuario">
             Antojos EAFIT
             {% if user.is_authenticated %}
-                <p>Bienvenido, {{ user.nombre_completo }}</p>
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            <p>Bienvenido, {{ user.nombre_completo }}</p>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
-                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro_view' %}">Registrarse</a>
+            <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+            <a href="{% url 'registro_view' %}">Registrarse</a>
             {% endif %}
         </div>
     </div>
@@ -68,7 +77,8 @@
                         {% if product.image_url %}
                         <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
                         {% else %}
-                        <img src="{% static 'media/products/images/default-product.png' %}" class="card-img-top" alt="Imagen no disponible">
+                        <img src="{% static 'media/products/images/default-product.png' %}" class="card-img-top"
+                            alt="Imagen no disponible">
                         {% endif %}
                         <div class="card-body p-2 text-center">
                             <h6 class="card-title mb-1">{{ product.name }}</h6>

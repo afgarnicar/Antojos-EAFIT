@@ -34,19 +34,22 @@
 
         <div class="iconos-derecha">
             <i id="icono-usuario" class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="{% url 'busqueda_view' %}">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
 
         <div id="menu-usuario" class="menu-usuario">
             Antojos EAFIT
             {% if user.is_authenticated %}
+            <p>Bienvenido, {{ user.nombre_completo }}</p>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
+            <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+            <a href="{% url 'registro_view' %}">Registrarse</a>
             {% endif %}
-                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro_view' %}">Registrarse</a>
-                <p>Bienvenido, {{ user.nombre_completo }}</p>
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
         </div>
+        
     </div>
 
     <div class="container mt-5">

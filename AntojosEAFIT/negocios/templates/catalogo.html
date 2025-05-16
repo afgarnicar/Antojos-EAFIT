@@ -22,7 +22,7 @@
             transition: transform 0.2s;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .product-card:hover {
@@ -156,8 +156,15 @@
                 <a href="{% url 'inicio' %}">Inicio</a>
                 <a href="{% url 'categorias' %}">Categorias</a>
                 <a href="{% url 'catalogo' %}">Productos</a>
+
+                {% if user.is_authenticated %}
+                <!-- Solo muestro estos enlaces si el usuario está logueado -->
                 <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
-                <a href="{% url 'entrepreneur_list' %}">Lista emprendimientos</a>
+                <a href="{% url 'entrepreneur_list' %}">Mis emprendimientos</a> <!-- Cambié el texto para claridad -->
+                {% else %}
+                <!-- Opcional: Enlaces para usuarios no logueados -->
+                <a href="{% url 'login_view' %}">Iniciar sesión para crear</a>
+                {% endif %}
             </div>
         </div>
 
@@ -165,17 +172,19 @@
 
         <div class="iconos-derecha">
             <i id="icono-usuario" class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="{% url 'busqueda_view' %}">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
 
         <div id="menu-usuario" class="menu-usuario">
             Antojos EAFIT
             {% if user.is_authenticated %}
-                <p>Bienvenido, {{ user.nombre_completo }}</p>
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            <p>Bienvenido, {{ user.nombre_completo }}</p>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
-                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro_view' %}">Registrarse</a>
+            <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+            <a href="{% url 'registro_view' %}">Registrarse</a>
             {% endif %}
         </div>
     </div>
@@ -193,11 +202,13 @@
                 <img src="{% static 'cuentas/img/recomendado3.png' %}" class="d-block w-100" alt="Emprendimiento 3">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmprendimientos"
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmprendimientos"
+            data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
@@ -220,7 +231,8 @@
                             {% if product.image_url %}
                             <img src="{{ product.image_url }}" class="product-img" alt="{{ product.name }}">
                             {% else %}
-                            <img src="{% static 'media/products/images/default-product.png' %}" class="product-img" alt="Imagen no disponible">
+                            <img src="{% static 'media/products/images/default-product.png' %}" class="product-img"
+                                alt="Imagen no disponible">
                             {% endif %}
                         </div>
                         <div class="product-info">

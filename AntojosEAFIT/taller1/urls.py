@@ -6,6 +6,7 @@ from taller1 import views as taller1_views
 from negocios import views as negocios_views
 from django.conf import settings
 from django.conf.urls.static import static
+from busqueda import views as busqueda_views
 
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
     path('', include('negocios.urls')),
     path('', include('RegistroEmprendedores.urls')),
     path('', include('guia.urls')),
+    path('', include('busqueda.urls')),
 ]
 
 #if settings.DEBUG:

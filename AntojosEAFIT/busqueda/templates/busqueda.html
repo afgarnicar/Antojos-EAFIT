@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda - Antojos EAFIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'cuentas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'negocios/css/carrusel.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <style>
+        body {
+            background-color: #fff;
+            /* fondo blanco */
+            color: #000;
+            /* texto negro */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .search-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 80px;
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-button {
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            background-color: #f0f0f0;
+            /* gris claro */
+            border: none;
+            border-radius: 25px;
+            color: #000;
+            outline: none;
+        }
+
+        .search-box::placeholder {
+            color: #aaa;
+        }
+
+        .results-container {
+            margin-top: 20px;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #eee;
+            /* gris claro */
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            background-color: #ddd;
+            transform: translateX(5px);
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #5B6BF5;
+            font-weight: bold;
+        }
+
+        .no-results {
+            text-align: center;
+            margin-top: 50px;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="contenedor-izquierda">
+            <div class="icono-menu" id="icono-menu">
+                <div class="linea"></div>
+                <div class="linea"></div>
+                <div class="linea"></div>
+            </div>
+            <div class="menu-opciones" id="menu-opciones">
+                <a href="{% url 'inicio' %}">Inicio</a>
+                <a href="{% url 'categorias' %}">Categorias</a>
+                <a href="{% url 'catalogo' %}">Productos</a>
+
+                {% if user.is_authenticated %}
+                <!-- Solo muestro estos enlaces si el usuario está logueado -->
+                <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
+                <a href="{% url 'entrepreneur_list' %}">Mis emprendimientos</a> <!-- Cambié el texto para claridad -->
+                {% else %}
+                <!-- Opcional: Enlaces para usuarios no logueados -->
+                <a href="{% url 'login_view' %}">Iniciar sesión para crear</a>
+                {% endif %}
+            </div>
+        </div>
+        <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
+        <div class="iconos-derecha">
+            <i id="icono-usuario" class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div id="menu-usuario" class="menu-usuario">
+            Antojos EAFIT
+            {% if user.is_authenticated %}
+            <p>Bienvenido, {{ user.nombre_completo }}</p>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+            <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+            <a href="{% url 'registro_view' %}">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="search-container">
+        <div class="search-header">
+            <a href="{% url 'catalogo' %}" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1>Buscar Productos</h1>
+        </div>
+
+        <input type="text" class="search-box" id="searchInput" placeholder="Escribe el nombre del producto..."
+            autocomplete="off" autofocus>
+
+        <div class="loading" id="loadingIndicator">
+            <i class="fas fa-spinner fa-spin"></i> Buscando...
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <!-- Los resultados aparecerán aquí -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            let debounceTimer;
+
+            // URL de la imagen por defecto (debes reemplazar esto con tu ruta real)
+            const defaultImageUrl = '/static/media/products/images/default-product.png';
+
+            searchInput.addEventListener('input', function (e) {
+                const query = e.target.value.trim();
+                clearTimeout(debounceTimer);
+
+                if (query.length > 2) {
+                    loadingIndicator.style.display = 'block';
+                    resultsContainer.innerHTML = '';
+
+                    debounceTimer = setTimeout(() => {
+                        fetch(`/api/search-products/?q=${encodeURIComponent(query)}`)
+                            .then(response => {
+                                if (!response.ok) throw new Error('Error en la respuesta');
+                                return response.json();
+                            })
+                            .then(data => {
+                                loadingIndicator.style.display = 'none';
+                                displayResults(data);
+                            })
+                            .catch(error => {
+                                loadingIndicator.style.display = 'none';
+                                console.error('Error:', error);
+                                resultsContainer.innerHTML = `
+                                <div class="no-results">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p>Error al cargar los resultados</p>
+                                </div>
+                            `;
+                            });
+                    }, 500);
+                } else {
+                    resultsContainer.innerHTML = '';
+                    loadingIndicator.style.display = 'none';
+                }
+            });
+
+            function displayResults(products) {
+                if (!products || products.length === 0) {
+                    resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No se encontraron productos</p>
+                    </div>
+                `;
+                    return;
+                }
+
+                let html = '';
+                products.forEach(product => {
+                    // Usamos la imagen del producto o la imagen por defecto
+                    const imageUrl = product.image_url || defaultImageUrl;
+
+                    html += `
+                    <a href="/product/${product.id}" class="product-link" style="text-decoration: none;">
+                        <div class="product-card">
+                            <img src="${product.image_url}" 
+                                 class="product-image" 
+                                 alt="${product.name}"
+                                 onerror="this.src='${defaultImageUrl}'">
+                            <div class="product-info">
+                                <div class="product-name">${product.name}</div>
+                                <div class="product-price">$${product.price.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                });
+
+                resultsContainer.innerHTML = html;
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script_menu.js' %}"></script>
+</body>
+
+</html>

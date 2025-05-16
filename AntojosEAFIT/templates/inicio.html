@@ -2,6 +2,7 @@
 {% load custom_filters %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,27 +10,30 @@
 
     <!-- jQuery first -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'cuentas/css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'negocios/css/carrusel.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/carrusel_recomendados.css' %}">
     <link rel="stylesheet" href="{% static 'css/main_banner.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
+
 <body>
 
 
@@ -43,13 +47,18 @@
             </div>
 
             <div class="menu-opciones" id="menu-opciones">
-
                 <a href="{% url 'inicio' %}">Inicio</a>
                 <a href="{% url 'categorias' %}">Categorias</a>
                 <a href="{% url 'catalogo' %}">Productos</a>
-                <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
-                <a href="{% url 'entrepreneur_list' %}">Lista emprendimientos</a>
 
+                {% if user.is_authenticated %}
+                <!-- Solo muestro estos enlaces si el usuario está logueado -->
+                <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
+                <a href="{% url 'entrepreneur_list' %}">Mis emprendimientos</a> <!-- Cambié el texto para claridad -->
+                {% else %}
+                <!-- Opcional: Enlaces para usuarios no logueados -->
+                <a href="{% url 'login_view' %}">Iniciar sesión para crear</a>
+                {% endif %}
             </div>
         </div>
 
@@ -59,18 +68,20 @@
 
         <div class="iconos-derecha">
             <i id="icono-usuario" class="fa-solid fa-user"></i>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="{% url 'busqueda_view' %}">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
         </div>
 
 
         <div id="menu-usuario" class="menu-usuario">
             Antojos EAFIT
             {% if user.is_authenticated %}
-                <p>Bienvenido, {{ user.nombre_completo }}</p>
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            <p>Bienvenido, {{ user.nombre_completo }}</p>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
             {% else %}
-                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
-                <a href="{% url 'registro_view' %}">Registrarse</a>
+            <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+            <a href="{% url 'registro_view' %}">Registrarse</a>
             {% endif %}
         </div>
     </div>
@@ -114,20 +125,26 @@
                         {% for product in group %}
                         <div class="col-md-4">
                             <div class="card">
-                                <div class="cuadro-recomendado-base {% cycle 'cuadro-recomendado-gris' 'cuadro-recomendado-azul' 'cuadro-recomendado-gris' %}">
+                                <div
+                                    class="cuadro-recomendado-base {% cycle 'cuadro-recomendado-gris' 'cuadro-recomendado-azul' 'cuadro-recomendado-gris' %}">
                                     {% if product.image_url %}
                                     <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
                                     {% else %}
-                                    <img src="{% static 'media/products/images/default-product.png' %}" class="card-img-top" alt="Imagen no disponible">
+                                    <img src="{% static 'media/products/images/default-product.png' %}"
+                                        class="card-img-top" alt="Imagen no disponible">
                                     {% endif %}
                                 </div>
                                 <div class="card-body">
-                                    <div class="recomendado-abajo-base {% cycle 'recomendado-abajo-azul' 'recomendado-abajo-gris' 'recomendado-abajo-azul' %}" style="font-size: 14px; min-height: 40px; padding: 8px 15px;">
+                                    <div class="recomendado-abajo-base {% cycle 'recomendado-abajo-azul' 'recomendado-abajo-gris' 'recomendado-abajo-azul' %}"
+                                        style="font-size: 14px; min-height: 40px; padding: 8px 15px;">
                                         {{ product.name }}
                                     </div>
-                                    <p class="card-text text-muted small mb-2">{{ product.entrepreneur.business_name }}</p>
+                                    <p class="card-text text-muted small mb-2">{{ product.entrepreneur.business_name }}
+                                    </p>
                                     <p class="card-text fw-bold mb-3">${{ product.price }}</p>
-                                    <a href="{% url 'product_detail' product.pk %}" class="ver-ya" style="background-color: white !important; color: #5B6BF5 !important; border: 2px solid #5B6BF5; text-decoration: none;">Ver detalles</a>
+                                    <a href="{% url 'product_detail' product.pk %}" class="ver-ya"
+                                        style="background-color: white !important; color: #5B6BF5 !important; border: 2px solid #5B6BF5; text-decoration: none;">Ver
+                                        detalles</a>
                                 </div>
                             </div>
                         </div>
@@ -138,18 +155,20 @@
             {% endfor %}
         </div>
 
-        <button class="carousel-control-prev exact-arrow" type="button" data-bs-target="#carouselRecomendados" data-bs-slide="prev">
+        <button class="carousel-control-prev exact-arrow" type="button" data-bs-target="#carouselRecomendados"
+            data-bs-slide="prev">
             <span class="arrow-icon-wrapper">
                 <svg class="arrow-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" fill="black"/>
+                    <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" fill="black" />
                 </svg>
             </span>
         </button>
 
-        <button class="carousel-control-next exact-arrow" type="button" data-bs-target="#carouselRecomendados" data-bs-slide="next">
+        <button class="carousel-control-next exact-arrow" type="button" data-bs-target="#carouselRecomendados"
+            data-bs-slide="next">
             <span class="arrow-icon-wrapper">
                 <svg class="arrow-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" fill="black"/>
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" fill="black" />
                 </svg>
             </span>
         </button>
@@ -160,20 +179,17 @@
     <!-- Scripts al final del body -->
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEk039Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEk039Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
     <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="{% static 'js/script_menu.js' %}"></script>
     <script src="{% static 'js/custom-carousel.js' %}"></script>
 
 </body>
+
 </html>
-
-
-
-
-
-

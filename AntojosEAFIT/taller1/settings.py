@@ -34,6 +34,9 @@ CLOUDINARY_STORAGE = {
 
 cloudinary.config(secure=True)
 
+CLOUDINARY_URL = 'cloudinary://tu_api_key:tu_api_secret@tu_cloud_name'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,7 +53,7 @@ SECRET_KEY = 'django-insecure-7u@cf92-s5)if73u=a21(=#qty^nrk4_kd%%bu7q@ke88$&w_%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
 
 # Application definition
@@ -69,6 +72,7 @@ INSTALLED_APPS = [
     'negocios',
     'RegistroEmprendedores',
     'guia',
+    'busqueda',
 
 ]
 
